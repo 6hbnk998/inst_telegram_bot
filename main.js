@@ -322,3 +322,19 @@ function cancelVacation(data){
 //   }
 // }
 // checkPromise()
+
+
+async function getData(){
+  const url = 'https://www.cbr-xml-daily.ru/daily_json.js'
+  const response = await fetch(url);
+  const data = await response.json();
+  const USDdata = data.Valute.USD.Value.toFixed(2);
+  const EURData = data.Valute.EUR.Value.toFixed(2);
+
+  const USDel = document.querySelector('#usd');
+  const EURel = document.querySelector('#eur')
+
+  USDel.innerText = USDdata;
+  EURel.innerText = EURData;
+}
+getData()
