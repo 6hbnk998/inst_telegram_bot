@@ -338,3 +338,6 @@ async function getData(){
   EURel.innerText = EURData;
 }
 getData()
+
+const = 
+      const =
