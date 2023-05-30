@@ -1,8 +1,6 @@
-# webdriver
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.keys import Keys
+import time
 
 # telebot
 import time
@@ -12,12 +10,27 @@ import os
 import glob
 
 
+# options
+options = webdriver.ChromeOptions()
+
+# user-agent
+options.add_argument("user-agent=Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0")
+
+# for ChromeDriver version 79.0.3945.16 or over
+options.add_argument("--disable-blink-features=AutomationControlled")
+options.add_argument("--no-sandbox")
+# headless mode
+# options.add_argument("--headless")
+options.headless = True
+
+driver = webdriver.Chrome(
+    executable_path="/home/insta_bot/chromedriver",
+    options=options
+)
+
 # элементы бота
 api = ''
 bot = telebot.TeleBot(api)
-
-# элементы вэбрайвера
-driver = webdriver.Chrome(ChromeDriverManager().install())
 
 @bot.message_handler(commands=['start'])
 def start(message):
